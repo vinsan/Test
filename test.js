@@ -13,8 +13,8 @@ class PageSplitter{
 	 constructor(items, itemsPerPage){
 	  this.pages = [];
 	  var i =0; //tiene traccia degli elementi di items
-	  var j = 0;  //
-	  var counter = 0;
+	  var j = 0;  //tiene traccia degli elementi di pages
+	  var counter = 0;  //tiene traccia degli elementi in temp
 	  var temp = [];
 	  while(i<items.length){
 	    temp[counter] = items[i];
@@ -23,7 +23,7 @@ class PageSplitter{
 	    if(temp.length==itemsPerPage){
 	      this.pages[j] = temp;
 	      temp = [];
-	      counter =0;
+	      counter = 0;
 	      j++;
 	    }
 	  }
@@ -50,17 +50,25 @@ class PageSplitter{
   }
   
   pageIndex(checkItemBelongsTo){
-    if(checkItemBelongsTo<0)
-    return -1;
-    else  return 0;
+    var i = 0;
+    while(i<this.pageCount()){
+      var j = 0;
+      while(j<this.pageItemCount(i)){
+        if(this.pages[i][j]==checkItemBelongsTo)
+          return j;
+        j++;
+      }
+      i++;
+    }
+    return -1;  //elemento inesistente, ritorno -1;
   }
   
 }
 
 let splitter = new PageSplitter([1, 2, 3, 'a', 'b', 'c'], 2);
-console.log(splitter.pageCount());  //3
-console.log(splitter.itemCount());  //6
-console.log(splitter.pageItemCount(0)); //2
-console.log(splitter.pageItemCount(3)); //-1
-console.log(splitter.pageIndex(2)); //1
-console.log(splitter.pageIndex(-2));  //-1
+splitter.pageCount();  //3
+splitter.itemCount();  //6
+splitter.pageItemCount(0); //2
+splitter.pageItemCount(3); //-1
+splitter.pageIndex(2); //1
+splitter.pageIndex(-2);  //-1
