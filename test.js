@@ -53,17 +53,15 @@ class PageSplitter{
   }
   
   pageIndex(checkItemBelongsTo){
-    var i = 0;
-    while(i<this.pageCount()){
-      var j = 0;
-      while(j<this.pageItemCount(i)){
-        if(this.pages[i][j]==checkItemBelongsTo)
-          return j;
-        j++;
-      }
-      i++;
-    }
-    return -1;  //elemento inesistente, ritorno -1;
+	  if(checkItemBelongsTo<0||checkItemBelongsTo>this.itemCount())
+		  return -1;
+	  else{
+		var i = 0;
+		var index = 0;
+		while(i<checkItemBelongsTo){
+			
+		}
+	  }
   }
   
 }
