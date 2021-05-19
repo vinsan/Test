@@ -27,6 +27,9 @@ class PageSplitter{
 	      j++;
 	    }
 	  }
+		 if(temp!=[]){
+			this.pages[j] = temp; 
+		 }
   }
   
   pageCount(){
