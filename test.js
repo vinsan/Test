@@ -55,12 +55,23 @@ class PageSplitter{
   pageIndex(checkItemBelongsTo){
 	  if(checkItemBelongsTo<0||checkItemBelongsTo>this.itemCount())
 		  return -1;
+	  if(checkItemBelongsTo==0)
+		  return 0;	//l'elemento in posizione 0 è sempre nella pagina 0
+	  else if(checkItemBelongsTo==this.itemCount())
+		  return this.pages.length-1; //l'ultimo elemento è sempre nell'ultima pagina
 	  else{
-		var i = 0;
-		var index = 0;
-		while(i<checkItemBelongsTo){
-			
+		var i = 0;	//per muoversi tra le pagine
+		var j = 1;	//per muoversi all'interno di una pagina, inizio da 1 perchè l'elemento 0 è gestito dall'IF
+		var index = 1;	//il numero di elementi scorsi dalla lista
+		while(index<checkItemBelongsTo){
+			j++;
+			index++;
+			if(j>this.pages[i].length){
+				j=0;
+				i++;
+			}
 		}
+		  return i;
 	  }
   }
   
